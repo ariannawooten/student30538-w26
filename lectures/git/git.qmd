@@ -460,9 +460,10 @@ Tips:
 # Track Multiple Versions on Local -- Branching (Chapter 3)
 
 ## Roadmap
-* Branching: overview
-* Creating a New Branch
-* `HEAD` and Switching Branches
+* Branching
+    * What is a branch? 
+    * Creating a New Branch
+    * `HEAD` and Switching Branches
 * "Undo"
 
 ## Branching {style="font-size: 0.6em"}
@@ -509,6 +510,8 @@ Tips:
 * `Master` untouched (it is still C0 <- C1 <- C2)
 
 ## Undo conceptual {style="font-size: 0.7em"}
+
+Now that we know about branches, we can learn about the various ways to "undo" our work
 
 From git for ages 4 and up
 
@@ -597,7 +600,7 @@ You tested your work and you are ready to put it into production by updating the
 
 This is called a _"three way merge"_ because it relies on three inputs: the *nearest common ancestor* (`C2`), current branch (`C4`), incoming branch ( `C5`)
 
-## Three way merge III{style="font-size: 0.7em"}
+## Three way merge III {style="font-size: 0.7em"}
 
 You ask git to merge but it refuses!
 
@@ -632,8 +635,8 @@ Merge made by the 'ort' strategy.
 ![](img/merging_4.png){fig-align="center"}
 
 
-
-## Tips on merging 
+<!--PG to GGG remove this slide next year-->
+## Tips on merging (SKIP)
 * We have taught `git merge <branch> --ff-only` and `git merge <branch> --no-ff -m "explain what's been merged"`. 
 * In principle, you can ask git to merge without telling it which type of merge or what is the commit message, but we discourage this. It's like joining multiple tables without knowing the details of the join (e.g. 1:1 or 1:many)!
 
@@ -661,6 +664,10 @@ Once work has happened in multiple branches, there will likely be a desire to re
 
 
 ## Three way merge with a conflict II
+
+![](img/merge_example1.png){fig-align="center" height=80%}
+
+## Three way merge with a conflict III {style="font-size: 0.8em"}
 
 **Original Code**
 ```{python}
@@ -738,9 +745,8 @@ def add(x, y):
 
 ::::
 
-\normalsize
-
-* Running *git switch* command switches to different branches, and each branch contains a different version of *add.py*
+* **Conflict**: Each branch contains `add.py` with a different version of the `add()` function 
+* Discussion q: suppose branch `iss53` added a new function starting at line 6 `sum()`. Would there be a conflict?
 
 
 <!--which has the following commit history:
@@ -757,18 +763,8 @@ def add(x, y):
 
 \normalsize
 
-## Three way merge with a conflict II
 
-![](img/merge_example1.png){fig-align="center" height=80%}
-
-
-## Three way merge with a conflict III
-
-* We will try to merge hotfix into main
-![](img/merge_example2.png){fig-align="center" height=80%}
-
-
-## Three way merge with a conflict V {style="font-size: 0.8em"}
+## Three way merge with a conflict IV (SKIP) {style="font-size: 0.8em"}
 * Now let's try to merge `main` and `hotfix` together
 * Doing so will create a new commit, C4
 
@@ -786,7 +782,7 @@ def add(x, y):
 \normalsize
 
 
-## Three way merge with a conflict VI
+## Three way merge with a conflict V
 ```{}
 % git switch main
 % git merge hotfix --no-ff -m "reconcile addition"
@@ -802,7 +798,7 @@ CONFLICT (content): Merge conflict in add.py
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
-## Three way merge with a conflict VII {style="font-size: 0.8em"}
+## Three way merge with a conflict VI {style="font-size: 0.8em"}
 * After you type `git merge hotfix`, git will edit your `add.py` file and use the following format wherever it finds a conflict:
 
 ![](img/merge_conflicts_1.png){fig-align="center" width=100%}
@@ -821,7 +817,7 @@ Incoming change because it is more general
 ::: 
 
 
-## Three way merge with a conflict VIII
+## Three way merge with a conflict VII
 * In this case, we'll keep what's in `hotfix`
 * How `add.py` looks after we've clicked "Accept incoming change": exactly like version in `hotfix`
 
@@ -841,14 +837,14 @@ def add(x, y):
 * (Of course, you could have resolved it by "Accepting current change", which would look exactly like `main`!)
 
 
-## Three way merge with a conflict IX
+## Three way merge with a conflict VIII
 * After resolving, have to add and then commit the merge
 ```{}
 git add add.py
 git commit -m "C4: resolved conflict between main and hotfix and merged"
 ```
 
-## Three way merge with a conflict X -- image
+## Three way merge with a conflict IX -- image
 
 
 ![](img/merge_example3.png){fig-align="center" height=50%}
